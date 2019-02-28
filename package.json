@@ -6,6 +6,7 @@
     "dotenv": "^6.2.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-jss": "^8.6.1",
     "react-map-gl": "^4.0.13",
     "react-scripts": "2.1.5",
     "react-scrollama": "^0.5.0"

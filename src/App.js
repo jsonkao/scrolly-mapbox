@@ -44,15 +44,16 @@ const styles = {
 
 const steps = [
   {
-    latitude: 33.1729,
-    longtiude: 102.411,
-    zoom: 4,
-  },
-  {
     text: 'Qingxi',
     latitude: 22.8442,
     longitude: 114.1643,
-    zoom: 13,
+    zoom: 11,
+  },
+  {
+    text: 'Hunghua Zhen',
+    latitude: 24.193648,
+    longtiude: 112,
+    zoom: 11,
   },
 ];
 
@@ -64,7 +65,11 @@ class App extends Component {
       transitionDuration: 5000,
       transitionInterpolator: new FlyToInterpolator(),
       transitionEasing: easeCubic,
-      ...steps[0],
+
+      // Initial view settings
+      latitude: 23.1729,
+      longtiude: 112.411,
+      zoom: 4,
     },
   };
 

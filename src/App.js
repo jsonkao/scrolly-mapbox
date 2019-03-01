@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Scrollama, Step } from 'react-scrollama';
-import ReactMapGL, { FlyToInterpolator } from 'react-map-gl';
-import { easeCubic } from 'd3-ease';
+import ReactMapboxGl from 'react-mapbox-gl';
 import injectSheet from 'react-jss';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
-import CustomMapController from './CustomMapController';
 
 const styles = {
   graphicContainer: {
@@ -45,61 +42,52 @@ const styles = {
 const steps = [
   {
     text: 'Qingxi',
-    latitude: 22.8442,
-    longitude: 114.1643,
+    // must be in longtiude latitutude, not lat-lng
+    center: [114.1643, 22.8442],
     zoom: 11,
   },
   {
     text: 'Hunghua Zhen',
-    latitude: 24.193648,
-    longtiude: 112,
+    center: [112, 24.193648],
     zoom: 11,
   },
 ];
 
+const MyMap = ReactMapboxGl({
+  accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
+  interactive: false,
+});
+
 class App extends Component {
   state = {
-    viewport: {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      transitionDuration: 5000,
-      transitionInterpolator: new FlyToInterpolator(),
-      transitionEasing: easeCubic,
-
-      // Initial view settings
-      latitude: 23.1729,
-      longtiude: 112.411,
-      zoom: 4,
-    },
+    center: [112.411, 23.1729],
+    zoom: 4,
   };
-
-  mapController = new CustomMapController();
 
   onViewportChange = viewport => {
     this.setState({ viewport });
   };
 
-  onStepEnter = ({ data: { latitude, longitude, zoom } }) => {
-    const viewport = {
-      ...this.state.viewport,
-      latitude,
-      longitude,
-      zoom,
-    };
-    this.setState({ viewport });
+  onStepEnter = ({ data: { center, zoom } }) => {
+    this.setState({ center, zoom });
   };
 
   render() {
+    const { zoom, center } = this.state;
     const { classes } = this.props;
 
     return (
       <div className={classes.graphicContainer}>
         <figure className={classes.sticky}>
-          <ReactMapGL
-            {...this.state.viewport}
-            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-            onViewportChange={this.onViewportChange}
-            controller={this.mapController}
+          <MyMap
+            style="mapbox://styles/mapbox/satellite-v9"
+            containerStyle={{
+              height: '100vh',
+              width: '100vw',
+            }}
+            center={center}
+            zoom={[zoom]}
+            flyToOptions={{ speed: 0.75 }}
           />
         </figure>
         <article className={classes.steps}>

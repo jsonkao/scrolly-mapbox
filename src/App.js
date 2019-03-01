@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Scrollama, Step } from 'react-scrollama';
-import ReactMapboxGl from 'react-mapbox-gl';
 import injectSheet from 'react-jss';
+import MyMap from './MyMap.js'
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const styles = {
@@ -53,11 +53,6 @@ const steps = [
   },
 ];
 
-const MyMap = ReactMapboxGl({
-  accessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
-  interactive: false,
-});
-
 class App extends Component {
   state = {
     center: [112.411, 23.1729],
@@ -79,16 +74,7 @@ class App extends Component {
     return (
       <div className={classes.graphicContainer}>
         <figure className={classes.sticky}>
-          <MyMap
-            style="mapbox://styles/mapbox/satellite-v9"
-            containerStyle={{
-              height: '100vh',
-              width: '100vw',
-            }}
-            center={center}
-            zoom={[zoom]}
-            flyToOptions={{ speed: 0.75 }}
-          />
+          <MyMap center={center} zoom={zoom} />
         </figure>
         <article className={classes.steps}>
           <Scrollama offset={0.5} onStepEnter={this.onStepEnter}>

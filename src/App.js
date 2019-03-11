@@ -4,12 +4,10 @@ import injectSheet from 'react-jss';
 import { copy } from './copy';
 import Graphic from './Graphic';
 
-const styles = {
+const styles = {};
 
-};
-
-const paragraphs = archieml(copy);
-console.log('paragraphs', paragraphs);
+// const paragraphs = archieml(copy);
+// console.log('paragraphs', paragraphs);
 
 const App = () => (
   <div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Scrollama, Step } from 'react-scrollama';
 import injectSheet from 'react-jss';
-import Map from './Map.js'
+import Map from './Map.js';
 
 const styles = {
   graphicContainer: {
@@ -17,36 +17,38 @@ const styles = {
     alignItems: 'center',
   },
   steps: {
-    padding: '0 5vw 130vh 5vw',
+    padding: '0 0 130vh 10vw',
   },
   step: {
     position: 'relative',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    margin: '0 auto 70vh auto',
+    backgroundColor: '#000',
+    marginBottom: '70vh',
     maxWidth: '500px',
     '&:last-child': {
       marginBottom: 0,
     },
   },
   stepText: {
-    textAlign: 'center',
-    padding: '1rem',
-    fontSize: '1.2rem',
+    padding: '0.6em 0.8em',
+    color: '#fff',
+    fontSize: '1.4em',
     fontFamily: 'Merriweather',
     fontWeight: 400,
-    lineHeight: '2rem',
+    lineHeight: '1.4em',
   },
 };
 
 const steps = [
   {
-    text: 'Qingxi',
+    text:
+      'I closed the silky, dark blue covers and reached for another volume from the mountain of records stacked in front of me.',
     // must be in longtiude latitutude, not lat-lng
     center: [114.1643, 22.8442],
     zoom: 11,
   },
   {
-    text: 'Hunghua Zhen',
+    text:
+      'I was looking for someone named Yan Ji Ci. Youngest of three, born on a winter’s night in 1900 in Dong Yang.',
     center: [112, 24.193648],
     zoom: 11,
   },
@@ -73,12 +75,12 @@ class Graphic extends Component {
     return (
       <div className={classes.graphicContainer}>
         <figure className={classes.sticky}>
-          <MyMap center={center} zoom={zoom} />
+          <Map center={center} zoom={zoom} />
         </figure>
         <article className={classes.steps}>
           <Scrollama offset={0.5} onStepEnter={this.onStepEnter}>
             {steps.map(step => (
-              <Step key={step.longitude} data={step}>
+              <Step key={step.text} data={step}>
                 <div className={classes.step}>
                   <p
                     className={classes.stepText}

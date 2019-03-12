@@ -1,3 +1,9 @@
+## Setup
+
+1. Copy `sample.env` to `.env` and populate the `REACT_APP_MAPBOX_ACCESS_TOKEN` variable.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
